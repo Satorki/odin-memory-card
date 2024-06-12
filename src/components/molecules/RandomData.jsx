@@ -3,25 +3,33 @@ import { createContext, useEffect, useState } from "react";
 const RandomDataContext = createContext();
 
 const RandomData = ({ children }) => {
-  const [charnames, setCharnames] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+  //const [charnames, setCharnames] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+  const [charnames, setCharnames] = useState("");
 
-  const randomize = () => {
-    fetch("https://narutodb.xyz/api/character?page=1&limit=1000")
-      .then((res) => res.json())
-      .then((data) => {
-        const randomCharnames = charnames.map(() => {
-          console.log(data.characters.length);
-          const randomChar = Math.floor(Math.random() * data.characters.length);
-          console.log(randomChar)
-          return data.characters[randomChar];
-        });
-        setCharnames(randomCharnames);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
+  //CHARACTERS NUMBERS ID  1344, 376, 1299, 1063, 259, 636, 1307, 1293, 861
+  //const randomChar = Math.floor(Math.random() * 9);
+  const charactersIds = [1344, 376, 1299, 1063, 259, 636, 1307, 1293, 861];
+
+  const getCharactersData = async () => {
+    try {
+      const charactersData = await Promise.all(
+        charactersIds.map((char) =>
+          fetch(`https://narutodb.xyz/api/character/${char}`).then((res) =>
+            res.json()
+          )
+        )
+      );
+      return charactersData;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+    }
   };
+
   useEffect(() => {
-    randomize();
+    getCharactersData();
   }, []);
+
 
   return (
     <RandomDataContext.Provider value={{ charnames }}>
