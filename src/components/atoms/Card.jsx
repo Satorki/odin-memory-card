@@ -1,7 +1,13 @@
-const Card = ({charname}) => {
-
-
-  return <div className="rounded-xl w-40 h-40 bg-teal-800">{charname}</div>;
+const Card = ({ charname }) => {
+  return (
+    <>
+      <img
+        className="w-40 h40 rounded-xl"
+        src={charname.images}
+        alt={charname.name}
+      />
+    </>
+  );
 };
 
 export default Card;
