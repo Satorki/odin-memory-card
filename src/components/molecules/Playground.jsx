@@ -5,11 +5,13 @@ import { ShowCardContext } from "./ShowCards";
 
 const Playground = () => {
 
-  const { character } = useContext(RandomDataContext)
+  const { character, shuffleNumber } = useContext(RandomDataContext)
   const { reversedCard } = useContext(ShowCardContext)
 
+  console.log(shuffleNumber());
+
   return <div className="mt-5 grid grid-cols-3 gap-3 items-center">
-    <Card character={character[0]} reversedCard={reversedCard} />
+    <Card character={character[0]} reversedCard={reversedCard} shuffleCharacters={shuffleNumber()}/>
     <Card character={character[1]} reversedCard={reversedCard} />
     <Card character={character[2]} reversedCard={reversedCard} />
     <Card character={character[3]} reversedCard={reversedCard} />
