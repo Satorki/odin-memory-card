@@ -1,6 +1,7 @@
 import GameInfo from "../molecules/GameInfo";
 import Playground from "../molecules/Playground";
 import { RandomData } from "../molecules/RandomData";
+import { ScoreControl } from "../molecules/ScoreControl";
 import { ShowCards } from "../molecules/ShowCards";
 
 const Game = () => {
@@ -8,8 +9,10 @@ const Game = () => {
     <div className="flex flex-col items-center">
       <RandomData>
         <ShowCards>
-        <Playground />
-        <GameInfo />
+          <ScoreControl>
+            <Playground />
+            <GameInfo />
+          </ScoreControl>
         </ShowCards>
       </RandomData>
     </div>
