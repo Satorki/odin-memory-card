@@ -3,12 +3,12 @@ import { createContext, useEffect, useState } from "react";
 const RandomDataContext = createContext();
 
 const RandomData = ({ children }) => {
-  //const [charnames, setCharnames] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
-  const [charnames, setCharnames] = useState("");
+  const [character, setCharacter] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
 
   //CHARACTERS NUMBERS ID  1344, 376, 1299, 1063, 259, 636, 1307, 1293, 861
   //const randomChar = Math.floor(Math.random() * 9);
   const charactersIds = [1344, 376, 1299, 1063, 259, 636, 1307, 1293, 861];
+  
 
   const getCharactersData = async () => {
     try {
@@ -26,13 +26,20 @@ const RandomData = ({ children }) => {
     }
   };
 
+  const fetchData = async () => {
+    const data = await getCharactersData();
+    setCharacter(data);
+  };
+
   useEffect(() => {
-    getCharactersData();
+    fetchData();
   }, []);
 
 
+
+
   return (
-    <RandomDataContext.Provider value={{ charnames }}>
+    <RandomDataContext.Provider value={{ character }}>
       {children}
     </RandomDataContext.Provider>
   );
